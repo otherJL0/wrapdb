@@ -10,7 +10,7 @@
     "arduinocore-avr", "cpr", "glew", "hinnant-date", "imgui-sfml",
     "libtomcrypt", "libxmlpp", "openal-soft", "openh264",
     "protobuf-c", "pugixml", "quazip", "sdl2_image", "sdl2_mixer",
-    "sdl2_net", "sdl2_ttf", "zstd"
+    "sdl2_net", "sdl2_ttf"
   ],
   "broken_windows": [
     "arduinocore-avr", "box2d", "cjson", "cpr", "docopt",
@@ -22,7 +22,7 @@
     "libxmlpp", "lzo2", "mocklibc", "mpdecimal", "netstring-c",
     "nng", "openh264", "openssl", "protobuf", "protobuf-c", "pugixml",
     "quazip", "rdkafka", "reflex", "sdl2_image", "sdl2_mixer",
-    "sdl2_net", "sdl2_ttf", "termbox", "unit-system", "xxhash", "zstd"
+    "sdl2_net", "sdl2_ttf", "termbox", "unit-system", "xxhash"
   ],
 
   "epoxy": {
