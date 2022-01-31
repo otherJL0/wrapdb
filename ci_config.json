@@ -147,5 +147,13 @@
       "libwayland-bin",
       "libwayland-dev"
     ]
+  },
+  "zstd": {
+    "build_options": [
+      "zstd:bin_tests=true"
+    ],
+    "debian_packages": [
+      "valgrind"
+    ]
   }
 }
