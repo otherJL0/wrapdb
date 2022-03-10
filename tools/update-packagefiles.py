@@ -28,10 +28,10 @@ def read_wrap(filename: Path):
 def read_archive_files(path: Path, base_path: Path):
     if path.suffix == '.zip':
         with zipfile.ZipFile(path, 'r') as archive:
-            archive_files = set(base_path / i for i in archive.namelist())
+            archive_files = {base_path / i for i in archive.namelist()}
     else:
         with tarfile.open(archive_path) as archive:
-            archive_files = set(base_path / i.name for i in archive)
+            archive_files = {base_path / i.name for i in archive}
     return archive_files
 
 if __name__ == '__main__':

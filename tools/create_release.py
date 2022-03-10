@@ -41,7 +41,7 @@ class CreateRelease:
             self.create_wrap_file()
 
     def read_wrap(self):
-        filename = Path('subprojects', self.name + '.wrap')
+        filename = Path('subprojects', f'{self.name}.wrap')
         self.wrap = configparser.ConfigParser(interpolation=None)
         self.wrap.read(filename)
         self.wrap_section = self.wrap[self.wrap.sections()[0]]
@@ -68,7 +68,7 @@ class CreateRelease:
         base_name = Path(self.tempdir, f'{self.tag}_patch')
         shutil.make_archive(base_name.as_posix(), 'zip', root_dir=self.tempdir, base_dir=directory)
 
-        patch_filename = base_name.with_name(base_name.name + '.zip')
+        patch_filename = base_name.with_name(f'{base_name.name}.zip')
         self.upload(patch_filename, 'application/zip')
 
         h = hashlib.sha256()
@@ -81,7 +81,7 @@ class CreateRelease:
         self.wrap_section['patch_hash'] = patch_hash
 
     def create_wrap_file(self):
-        filename = Path(self.tempdir, self.name + '.wrap')
+        filename = Path(self.tempdir, f'{self.name}.wrap')
         with open(filename, 'w') as f:
             self.wrap.write(f)
 
