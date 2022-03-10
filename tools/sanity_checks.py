@@ -82,8 +82,7 @@ class TestReleases(unittest.TestCase):
                 self.assertIn(k, PERMITTED_KEYS)
 
     def get_patch_path(self, wrap_section):
-        patch_directory = wrap_section.get('patch_directory')
-        if patch_directory:
+        if patch_directory := wrap_section.get('patch_directory'):
             return Path('subprojects', 'packagefiles', patch_directory)
 
         return None
@@ -208,15 +207,15 @@ class TestReleases(unittest.TestCase):
         self.assertNotIn('\\', value)
 
     def check_source_url(self, name: str, wrap_section: configparser.SectionProxy, version: str):
-        if name == 'sqlite3':
+        if name == 'netstring-c':
+            # There is no specific version for netstring-c
+            return True
+        elif name == 're2':
+            version = f'{version[:4]}-{version[4:6]}-{version[6:8]}'
+        elif name == 'sqlite3':
             segs = version.split('.')
             assert(len(segs) == 3)
             version = segs[0] + segs[1] + '0' + segs[2]
-        elif name == 're2':
-            version = f'{version[:4]}-{version[4:6]}-{version[6:8]}'
-        elif name == 'netstring-c':
-            # There is no specific version for netstring-c
-            return True
         source_url = wrap_section['source_url']
         version_ = version.replace('.', '_')
         self.assertTrue(version in source_url or version_ in source_url,
@@ -283,10 +282,10 @@ class TestReleases(unittest.TestCase):
                 tabs.append(f)
         if tabs:
             tabs_str = ', '.join([str(f) for f in tabs])
-            self.fail('Tabs in meson files are not allows: ' + tabs_str)
+            self.fail(f'Tabs in meson files are not allows: {tabs_str}')
         if not_permitted:
             not_permitted_str = ', '.join([str(f) for f in not_permitted])
-            self.fail('Not permitted files found: ' + not_permitted_str)
+            self.fail(f'Not permitted files found: {not_permitted_str}')
 
 
 if __name__ == '__main__':
